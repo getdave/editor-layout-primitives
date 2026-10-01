@@ -1,10 +1,21 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
-export function ImageIcon() {
-	// Mountain and sun, centred on the parent SVG.
+// Mountain and sun, 32x24. Centred on the parent SVG by default; `corner`
+// draws it at double size, inset from the top-right, clear of centred
+// content (covers are large, so a 32px icon vanishes in a thumbnail).
+export function ImageIcon( { corner = false } ) {
 	return (
-		<svg x="50%" y="50%" overflow="visible" className="lp-wireframe__icon">
-			<g transform="translate(-16 -12)">
+		<svg
+			x={ corner ? '100%' : '50%' }
+			y={ corner ? 0 : '50%' }
+			overflow="visible"
+			className="lp-wireframe__icon"
+		>
+			<g
+				transform={
+					corner ? 'translate(-96 32) scale(2)' : 'translate(-16 -12)'
+				}
+			>
 				<circle cx="8" cy="6" r="3" />
 				<path d="M0 24 L10 12 L16 18 L22 10 L32 24 Z" />
 			</g>

@@ -61,7 +61,9 @@
 	mask-size: 100% 100%;
 }
 
-.lp-wireframe--cover {
+// Doubled class so this beats core's `.wp-block-cover { min-height }`
+// regardless of stylesheet order. A cover's own minHeight is inline.
+.lp-wireframe.lp-wireframe--cover {
 	position: relative;
 	min-height: 360px;
 	display: flex;
