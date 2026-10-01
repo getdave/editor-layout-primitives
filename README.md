@@ -12,7 +12,7 @@ Layout Primitives offers the shapes on their own. Pick "three columns with image
 
 - Adds a "▦ Layouts" pattern category. The leading symbol sorts it near the top of the inserter's category list.
 - Pattern thumbnails draw empty headings, paragraphs, images, buttons and covers as grey SVG wireframes.
-- Inserted layouts are ordinary empty blocks in their placeholder state, with hints such as "Add a heading" and the native media placeholder for images.
+- Inserted layouts are ordinary empty blocks in their placeholder state, with hints such as "Add a heading" and a media placeholder for images. In the core set the plugin restyles empty images and covers so they match their thumbnails.
 
 ## The layouts
 
@@ -34,12 +34,12 @@ There are two versions of every layout.
 - With the [Canvas block plugin](https://github.com/Automattic/canvas) active, each layout is a single Canvas section (`patterns/canvas`). They also show up in Canvas's own "Add pattern" modal.
 - Without Canvas, the layouts use core Columns, Group and Cover blocks (`patterns/core`).
 
-The plugin picks the set on each request by checking whether `tabor/canvas` is in the block registry. Activating or deactivating Canvas switches the set on the next page load. Both sets use the same titles and leaf blocks.
+The plugin picks the set on each request by checking whether `tabor/canvas` is in the block registry. Activating or deactivating Canvas switches the set on the next page load. Both sets use the same titles and text blocks. The one structural difference is "Image with heading over it", which is a full-width image in Canvas and a Cover block in core.
 
 ## Try it
 
-- [Try it in Playground with Canvas](PLAYGROUND_CANVAS_URL)
-- [Try it in Playground without Canvas](PLAYGROUND_CORE_URL)
+- [Try it in Playground with Canvas](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/getdave/editor-layout-primitives/trunk/blueprint.json)
+- [Try it in Playground without Canvas](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/getdave/editor-layout-primitives/trunk/blueprint-core.json)
 
 Both open a new page in the editor. Open the inserter, choose Patterns and then "▦ Layouts".
 
@@ -47,7 +47,7 @@ The links use `blueprint.json` and `blueprint-core.json` from this repository, w
 
 ## Development
 
-You need Node.js and npm.
+You need Node.js 20 or later and npm.
 
 ```sh
 npm install
@@ -90,6 +90,8 @@ An `editor.BlockEdit` filter wraps heading, paragraph, image, button and cover b
 The second rule means a layout that has been filled in previews as real content wherever it appears later. Wireframes call `useBlockProps()`, so Canvas, Columns and Group still place them as normal.
 
 Core's pattern preview drops a root block's wide alignment, which would lay a wide Canvas section onto Canvas's narrower content grid. An `editor.BlockListBlock` filter adds `alignwide` back to wide Canvas layouts in previews only. Saved markup is never touched.
+
+On the canvas, a little CSS scoped to `.layout-primitive` gives the core set's empty images a 4:3 shape with an image icon, and swaps an empty Cover's black dim for a light tint with a corner icon. Each rule stops applying once the slot has content or the user picks an overlay colour.
 
 ## Known limitations
 

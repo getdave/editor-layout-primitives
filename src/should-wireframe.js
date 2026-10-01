@@ -3,8 +3,6 @@ export const MARKER = 'layout-primitive';
 const TEXT_BLOCKS = [ 'core/heading', 'core/paragraph', 'core/button' ];
 const MEDIA_BLOCKS = [ 'core/image', 'core/cover' ];
 
-export const WIREFRAME_BLOCKS = [ ...TEXT_BLOCKS, ...MEDIA_BLOCKS ];
-
 // core/button keeps its label in `text`; heading and paragraph use `content`.
 const TEXT_ATTRIBUTE = { 'core/button': 'text' };
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name:       Layout Primitives
+ * Plugin URI:        https://github.com/getdave/editor-layout-primitives
  * Description:       Simple wireframe layouts in a Layouts pattern category. Uses Canvas when it's active and core blocks otherwise.
  * Version:           0.1.0
  * Requires at least: 7.1
@@ -8,6 +9,7 @@
  * Author:            Dave Smith
  * License:           GPL-2.0-or-later
  * Text Domain:       layout-primitives
+ * Update URI:        https://github.com/getdave/editor-layout-primitives
  *
  * @package LayoutPrimitives
  */
@@ -90,7 +92,7 @@ function register_patterns() {
 	register_block_pattern_category(
 		'layout-primitives',
 		array(
-			'label'       => __( '▦ Layouts', 'layout-primitives' ),
+			'label'       => '▦ ' . __( 'Layouts', 'layout-primitives' ),
 			'description' => __( 'Simple starting layouts to fill with your own content.', 'layout-primitives' ),
 		)
 	);
