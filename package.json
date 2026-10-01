@@ -4,6 +4,12 @@
 	"private": true,
 	"description": "Simple wireframe layouts for the block editor.",
 	"license": "GPL-2.0-or-later",
+	"files": [
+		"layout-primitives.php",
+		"build/",
+		"patterns/",
+		"README.md"
+	],
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
@@ -11,7 +17,8 @@
 		"lint:js": "wp-scripts lint-js src scripts",
 		"env": "node scripts/env.mjs canvas",
 		"env:core": "node scripts/env.mjs core",
-		"check": "node scripts/check-layouts.mjs"
+		"check": "node scripts/check-layouts.mjs",
+		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "35.0.0",

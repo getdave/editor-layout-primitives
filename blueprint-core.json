@@ -1,0 +1,27 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "Layout Primitives without Canvas",
+		"description": "Simple wireframe layouts in a Layouts pattern category, using core blocks.",
+		"author": "getdave"
+	},
+	"landingPage": "/wp-admin/post-new.php?post_type=page",
+	"preferredVersions": { "php": "8.3", "wp": "7.1.2" },
+	"features": { "networking": true },
+	"login": true,
+	"steps": [
+		{
+			"step": "installTheme",
+			"themeData": { "resource": "wordpress.org/themes", "slug": "twentytwentyfive" },
+			"options": { "activate": true }
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github.com/getdave/editor-layout-primitives/releases/download/v0.1.0/layout-primitives.zip"
+			},
+			"options": { "activate": true }
+		}
+	]
+}
