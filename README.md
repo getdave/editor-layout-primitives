@@ -63,7 +63,7 @@ npm run env       # with Canvas, http://127.0.0.1:9400
 npm run env:core  # without Canvas, http://127.0.0.1:9401
 ```
 
-Checks and packaging.
+These commands run the checks and build the zip.
 
 ```sh
 npm test                  # unit tests
@@ -84,7 +84,7 @@ Every layout's root block carries the class `layout-primitive`.
 An `editor.BlockEdit` filter wraps heading, paragraph, image, button and cover blocks. It swaps in a wireframe only when all three of these hold.
 
 1. The editor is in preview mode (`isPreviewMode`, set by the pattern previews).
-2. The block is empty. Text blocks have no text, and images and covers have no URL.
+2. The block is empty. Text blocks have no text, and images and covers have no image.
 3. The block or one of its ancestors has the `layout-primitive` class.
 
 The second rule means a layout that has been filled in previews as real content wherever it appears later. Wireframes call `useBlockProps()`, so Canvas, Columns and Group still place them as normal.
@@ -94,7 +94,8 @@ Core's pattern preview drops a root block's wide alignment, which would lay a wi
 ## Known limitations
 
 - On mobile, empty Canvas text frames can clip or overlap. Canvas fits frames to their text and ignores placeholder text. This resolves once real text is entered.
-- The empty-state styling is editor-only. On the front end an empty core Cover renders as a grey 50% dim, and empty headings and paragraphs output empty tags. Canvas keeps their grid space. Core outputs nothing for an empty image.
+- The empty-state styling is editor-only. On the front end an empty core Cover renders as a grey 50% dim.
+- Empty headings and paragraphs output empty tags on the front end, which still take up their grid cells in Canvas. Core outputs nothing for an empty image.
 - Core Cover only shows its own media placeholder when it has no inner blocks. The core "Image with heading over it" layout relies on a tint, a corner icon and the toolbar's "Add media" button instead.
 - Wireframes can appear in other read-only previews, such as Site Editor view mode or revisions, for layouts whose slots are still empty.
 - Previews add `alignwide` to wide Canvas layouts to work around the dropped alignment above. This is preview-only and never saved.
