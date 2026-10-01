@@ -20,4 +20,7 @@ const server = spawn(
 	],
 	{ cwd: root, stdio: 'inherit' }
 );
-server.on( 'exit', ( code ) => process.exit( code ?? 0 ) );
+for ( const sig of [ 'SIGINT', 'SIGTERM', 'SIGHUP' ] ) {
+	process.on( sig, () => server.kill( sig ) );
+}
+server.on( 'exit', ( code, signal ) => process.exit( code ?? ( signal ? 1 : 0 ) ) );
