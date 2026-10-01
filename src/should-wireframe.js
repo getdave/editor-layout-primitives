@@ -22,8 +22,18 @@ export function isEmptyBlock( name, attributes = {} ) {
 	return false;
 }
 
-function hasMarker( className ) {
+export function hasMarker( className ) {
 	return ( className ?? '' ).split( /\s+/ ).includes( MARKER );
+}
+
+// Pattern previews drop the root's wide alignment class, so Canvas measures
+// a wide layout against its content-width grid. See src/preview-align.js.
+export function needsPreviewAlignWide( name, attributes = {} ) {
+	return (
+		name === 'tabor/canvas' &&
+		attributes.align === 'wide' &&
+		hasMarker( attributes.className )
+	);
 }
 
 // The marker can sit on the block itself (e.g. a cover root) or any ancestor.

@@ -5,6 +5,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 
 import { isEmptyBlock, shouldWireframe } from './should-wireframe';
 import WIREFRAMES from './wireframes';
+import './preview-align';
 import './style.scss';
 
 const withWireframe = createHigherOrderComponent( ( BlockEdit ) => {

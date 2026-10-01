@@ -1,4 +1,10 @@
-import { shouldWireframe, isEmptyBlock, MARKER } from '../should-wireframe';
+import {
+	shouldWireframe,
+	isEmptyBlock,
+	hasMarker,
+	needsPreviewAlignWide,
+	MARKER,
+} from '../should-wireframe';
 
 const inLayout = [ 'something-else', `foo ${ MARKER }` ];
 
@@ -89,5 +95,41 @@ describe( 'shouldWireframe', () => {
 				ancestorClassNames: [ `${ MARKER }-x` ],
 			} )
 		).toBe( false );
+	} );
+} );
+
+describe( 'hasMarker', () => {
+	it( 'finds the marker among other classes', () => {
+		expect( hasMarker( `is-style-x ${ MARKER } foo` ) ).toBe( true );
+		expect( hasMarker( MARKER ) ).toBe( true );
+	} );
+	it( 'is false for missing classes and substrings', () => {
+		expect( hasMarker( undefined ) ).toBe( false );
+		expect( hasMarker( '' ) ).toBe( false );
+		expect( hasMarker( `${ MARKER }-x x${ MARKER }` ) ).toBe( false );
+	} );
+} );
+
+describe( 'needsPreviewAlignWide', () => {
+	const attributes = { align: 'wide', className: MARKER };
+	it( 'is true for a wide Canvas layout', () => {
+		expect( needsPreviewAlignWide( 'tabor/canvas', attributes ) ).toBe(
+			true
+		);
+	} );
+	it( 'is false for other blocks, alignments or unmarked Canvas', () => {
+		expect( needsPreviewAlignWide( 'core/group', attributes ) ).toBe(
+			false
+		);
+		expect(
+			needsPreviewAlignWide( 'tabor/canvas', {
+				...attributes,
+				align: 'full',
+			} )
+		).toBe( false );
+		expect(
+			needsPreviewAlignWide( 'tabor/canvas', { align: 'wide' } )
+		).toBe( false );
+		expect( needsPreviewAlignWide( 'tabor/canvas' ) ).toBe( false );
 	} );
 } );
