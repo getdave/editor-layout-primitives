@@ -93,3 +93,79 @@
 		padding: 2rem;
 	}
 }
+
+// Empty states of inserted layouts (the editor canvas, not previews).
+// Everything is scoped to .layout-primitive and drawn in currentColor, so
+// the theme still decides colours. Once media is added, none of it applies.
+
+// The thumbnail's mountain-and-sun icon (see wireframes/image.js).
+$lp-image-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'%3E%3Ccircle cx='8' cy='6' r='3'/%3E%3Cpath d='M0 24 10 12 16 18 22 10 32 24Z'/%3E%3C/svg%3E");
+
+@mixin lp-image-icon( $width ) {
+	content: "";
+	position: absolute;
+	width: $width;
+	height: $width * 0.75;
+	background-color: currentColor;
+	opacity: 0.35;
+	mask: $lp-image-icon center / contain no-repeat;
+	pointer-events: none;
+}
+
+// Empty images in the core set: core's placeholder is a short, page-wide
+// strip with a diagonal line. Give it the thumbnail's 4:3 shape and centred
+// icon so the slot reads as "image here". The placeholder still grows to fit
+// its buttons when selected. Canvas sizes and draws its own placeholders.
+$lp-core-image: ".layout-primitive:not(.wp-block-tabor-canvas) .wp-block-image";
+
+#{$lp-core-image} > .block-editor-media-placeholder {
+	aspect-ratio: 4 / 3;
+
+	.components-placeholder__illustration {
+		display: none;
+	}
+
+	&::after {
+		@include lp-image-icon( 48px );
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+// Selected images show core's label and buttons instead, except small ones
+// (the quote portrait) whose placeholder has no room for them.
+#{$lp-core-image}.is-selected
+	> .block-editor-media-placeholder:not(.is-small)::after {
+	display: none;
+}
+
+// The quote's rounded portrait: a circle at the image's own width.
+#{$lp-core-image}.is-style-rounded > .block-editor-media-placeholder {
+	aspect-ratio: 1;
+	border-radius: 50%;
+
+	&::after {
+		width: 32px;
+		height: 24px;
+	}
+}
+
+// Empty covers: with no image the 50% dim draws a flat mid-grey box with
+// white text on it. Until media is added, swap the dim for core's light
+// placeholder tint, use the theme's text colour and show a corner icon (as
+// the thumbnail does). A chosen overlay colour or text colour is kept.
+.layout-primitive.wp-block-cover:not(.has-text-color):not(:has(> .wp-block-cover__image-background, > .wp-block-cover__video-background, > .wp-block-cover__embed-background)) {
+	color: inherit;
+
+	> .wp-block-cover__background:not([class*="-background-color"]):not(.has-background-gradient):not([style]) {
+		background-color: color-mix(in srgb, currentColor 10%, transparent);
+		opacity: 1;
+
+		&::after {
+			@include lp-image-icon( 64px );
+			top: 32px;
+			right: 32px;
+		}
+	}
+}
