@@ -23,4 +23,6 @@ const server = spawn(
 for ( const sig of [ 'SIGINT', 'SIGTERM', 'SIGHUP' ] ) {
 	process.on( sig, () => server.kill( sig ) );
 }
-server.on( 'exit', ( code, signal ) => process.exit( code ?? ( signal ? 1 : 0 ) ) );
+server.on( 'exit', ( code, signal ) =>
+	process.exit( code ?? ( signal ? 1 : 0 ) )
+);
