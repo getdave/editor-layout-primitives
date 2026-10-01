@@ -40,10 +40,13 @@ The plugin picks the set on each request by checking whether `tabor/canvas` is i
 
 - [Try it in Playground with Canvas](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/getdave/editor-layout-primitives/trunk/blueprint.json)
 - [Try it in Playground without Canvas](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/getdave/editor-layout-primitives/trunk/blueprint-core.json)
+- [Try it on the Bluebell & Bloom demo site, with Canvas](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/getdave/editor-layout-primitives/trunk/blueprint-site.json)
 
-Both open a new page in the editor. Open the inserter, choose Patterns and then "▦ Layouts".
+All three open a new page in the editor. Open the inserter, choose Patterns and then "▦ Layouts".
 
-The links use `blueprint.json` and `blueprint-core.json` from this repository, which install the plugin from the latest release zip. The Canvas link also installs Canvas.
+The links use `blueprint.json`, `blueprint-core.json` and `blueprint-site.json` from this repository, which install the plugin from the latest release zip. The first and third also install Canvas.
+
+The demo site link reuses the [Canvas user-testing site](https://github.com/getdave/wordpress-user-testing/tree/trunk/canvas-block). It fetches that repository's Canvas build, setup script and page content, so the site has a homepage, About, Workshops and Contact pages, photos in the Media Library and the Twenty Twenty-Five Morning style. The editor shows the site's header and footer around the page.
 
 ## Development
 

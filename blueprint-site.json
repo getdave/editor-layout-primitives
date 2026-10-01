@@ -1,0 +1,97 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "Layout Primitives on the Bluebell & Bloom demo site",
+		"description": "The Bluebell & Bloom demo site from getdave/wordpress-user-testing (Twenty Twenty-Five Morning, static homepage, About, Workshops and Contact pages, photos in the Media Library) with Canvas and Layout Primitives. Opens a new page.",
+		"author": "getdave"
+	},
+	"landingPage": "/wp-admin/post-new.php?post_type=page",
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "7.1.2"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "installTheme",
+			"themeData": {
+				"resource": "wordpress.org/themes",
+				"slug": "twentytwentyfive"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/canvas.zip"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github.com/getdave/editor-layout-primitives/releases/latest/download/layout-primitives.zip"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "mkdir",
+			"path": "/wordpress/wp-content/user-testing/content"
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/user-testing/setup.php",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/setup.php"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/user-testing/content/home.html",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/content/home.html"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/user-testing/content/about.html",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/content/about.html"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/user-testing/content/workshops.html",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/content/workshops.html"
+			}
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/user-testing/content/contact.html",
+			"data": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/content/contact.html"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-content/user-testing/setup.php';"
+		}
+	]
+}
