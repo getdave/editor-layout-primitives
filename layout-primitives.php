@@ -3,7 +3,7 @@
  * Plugin Name:       Layout Primitives
  * Plugin URI:        https://github.com/getdave/editor-layout-primitives
  * Description:       Simple wireframe layouts in a Layouts pattern category. Uses Canvas when it's active and core blocks otherwise.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 7.1
  * Requires PHP:      8.3
  * Author:            Dave Smith

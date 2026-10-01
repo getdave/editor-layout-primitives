@@ -43,7 +43,7 @@ The plugin picks the set on each request by checking whether `tabor/canvas` is i
 
 Both open a new page in the editor. Open the inserter, choose Patterns and then "▦ Layouts".
 
-The links use `blueprint.json` and `blueprint-core.json` from this repository, which install the plugin from the v0.1.0 release zip. The Canvas link also installs Canvas.
+The links use `blueprint.json` and `blueprint-core.json` from this repository, which install the plugin from the latest release zip. The Canvas link also installs Canvas.
 
 ## Development
 

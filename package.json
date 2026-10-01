@@ -1,6 +1,6 @@
 {
 	"name": "layout-primitives",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"private": true,
 	"description": "Simple wireframe layouts for the block editor.",
 	"license": "GPL-2.0-or-later",
