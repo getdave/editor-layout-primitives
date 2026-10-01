@@ -51,3 +51,66 @@ function enqueue_block_assets() {
 	);
 }
 add_action( 'enqueue_block_assets', __NAMESPACE__ . '\\enqueue_block_assets' );
+
+/**
+ * Layout slugs and titles, in display order.
+ *
+ * @return array<string, string>
+ */
+function layouts() {
+	return array(
+		'hero'           => __( 'Hero', 'layout-primitives' ),
+		'image-text'     => __( 'Image left, text right', 'layout-primitives' ),
+		'text-image'     => __( 'Text left, image right', 'layout-primitives' ),
+		'three-columns'  => __( 'Three columns with images', 'layout-primitives' ),
+		'three-features' => __( 'Three features', 'layout-primitives' ),
+		'quote'          => __( 'Quote', 'layout-primitives' ),
+		'image-overlay'  => __( 'Image with heading over it', 'layout-primitives' ),
+		'image-grid'     => __( 'Image grid', 'layout-primitives' ),
+		'call-to-action' => __( 'Call to action banner', 'layout-primitives' ),
+		'intro'          => __( 'Intro', 'layout-primitives' ),
+	);
+}
+
+/**
+ * Which pattern set to register: Canvas when its block exists, core otherwise.
+ *
+ * @return string 'canvas' or 'core'.
+ */
+function pattern_set() {
+	return \WP_Block_Type_Registry::get_instance()->is_registered( 'tabor/canvas' ) ? 'canvas' : 'core';
+}
+
+/**
+ * Register the Layouts category and the active pattern set.
+ * Runs after Canvas registers its block on init (priority 10).
+ */
+function register_patterns() {
+	// The leading symbol sorts the category first in label-sorted pickers.
+	register_block_pattern_category(
+		'layout-primitives',
+		array(
+			'label'       => __( '▦ Layouts', 'layout-primitives' ),
+			'description' => __( 'Simple starting layouts to fill with your own content.', 'layout-primitives' ),
+		)
+	);
+
+	$set = pattern_set();
+	foreach ( layouts() as $slug => $title ) {
+		$file = __DIR__ . "/patterns/{$set}/{$slug}.html";
+		if ( ! file_exists( $file ) ) {
+			continue;
+		}
+		register_block_pattern(
+			"layout-primitives/{$slug}",
+			array(
+				'title'         => $title,
+				'categories'    => array( 'layout-primitives' ),
+				'keywords'      => array( 'layout', 'wireframe' ),
+				'viewportWidth' => 1200,
+				'content'       => file_get_contents( $file ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			)
+		);
+	}
+}
+add_action( 'init', __NAMESPACE__ . '\\register_patterns', 20 );
