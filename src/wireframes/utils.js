@@ -7,3 +7,10 @@ export function textAlign( attributes ) {
 		attributes.align
 	);
 }
+
+// A Canvas child whose desktop frame spans every grid column is a backdrop
+// (image-overlay): other blocks sit on top of it.
+export function spansCanvasWidth( attributes ) {
+	const desktop = attributes.canvas?.desktop;
+	return !! desktop?.gridColumns && desktop.columnSpan >= desktop.gridColumns;
+}

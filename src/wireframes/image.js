@@ -1,8 +1,10 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import { spansCanvasWidth } from './utils';
 
 // Mountain and sun, 32x24. Centred on the parent SVG by default; `corner`
 // draws it at double size, inset from the top-right, clear of centred
-// content (covers are large, so a 32px icon vanishes in a thumbnail).
+// content (covers and Canvas backdrops are large, so a 32px icon vanishes
+// in a thumbnail).
 export function ImageIcon( { corner = false } ) {
 	return (
 		<svg
@@ -57,7 +59,8 @@ export default function ImageWireframe( { attributes } ) {
 				) : (
 					<rect width="100%" height="100%" rx="4" />
 				) }
-				<ImageIcon />
+				{ /* Backdrops carry text over their centre; keep the icon clear. */ }
+				<ImageIcon corner={ spansCanvasWidth( attributes ) } />
 			</svg>
 		</div>
 	);
