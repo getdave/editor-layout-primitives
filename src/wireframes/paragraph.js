@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { textAlign } from './heading';
+import { textAlign } from './utils';
 
 const LINE = 10;
 const GAP = 10;

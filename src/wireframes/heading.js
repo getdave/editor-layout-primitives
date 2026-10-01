@@ -1,4 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import { textAlign } from './utils';
 
 const HEIGHTS = { 1: 40, 2: 32, 3: 24 };
 
@@ -20,13 +21,5 @@ export default function HeadingWireframe( { attributes } ) {
 				/>
 			</svg>
 		</div>
-	);
-}
-
-export function textAlign( attributes ) {
-	return (
-		attributes.style?.typography?.textAlign ??
-		attributes.textAlign ??
-		attributes.align
 	);
 }
