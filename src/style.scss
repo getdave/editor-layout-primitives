@@ -154,11 +154,17 @@ $lp-core-image: ".layout-primitive:not(.wp-block-tabor-canvas) .wp-block-image";
 // Empty covers: with no image the 50% dim draws a flat mid-grey box with
 // white text on it. Until media is added, swap the dim for core's light
 // placeholder tint, use the theme's text colour and show a corner icon (as
-// the thumbnail does). A chosen overlay colour or text colour is kept.
-.layout-primitive.wp-block-cover:not(.has-text-color):not(:has(> .wp-block-cover__image-background, > .wp-block-cover__video-background, > .wp-block-cover__embed-background)) {
+// the thumbnail does). Only the default black dim is swapped: a chosen
+// overlay colour or gradient (preset class or inline style) or a text
+// colour keeps core's look. A cleared custom overlay leaves `style=""`,
+// hence matching on the style's content, not its presence.
+$lp-cover-media: "> .wp-block-cover__image-background, > .wp-block-cover__video-background, > .wp-block-cover__embed-background";
+$lp-default-dim: ".wp-block-cover__background:not([class*='-background-color']):not(.has-background-gradient):not([style*='background'])";
+
+.layout-primitive.wp-block-cover:not(.has-text-color):not(:has(#{$lp-cover-media})):has(> #{$lp-default-dim}) {
 	color: inherit;
 
-	> .wp-block-cover__background:not([class*="-background-color"]):not(.has-background-gradient):not([style]) {
+	> .wp-block-cover__background {
 		background-color: color-mix(in srgb, currentColor 10%, transparent);
 		opacity: 1;
 
