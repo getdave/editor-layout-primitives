@@ -1,0 +1,23 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/post-new.php?post_type=page",
+	"preferredVersions": { "php": "8.3", "wp": "7.1.2" },
+	"features": { "networking": true },
+	"login": true,
+	"steps": [
+		{
+			"step": "installTheme",
+			"themeData": { "resource": "wordpress.org/themes", "slug": "twentytwentyfive" },
+			"options": { "activate": true }
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/getdave/wordpress-user-testing/trunk/canvas-block/canvas.zip"
+			},
+			"options": { "activate": true }
+		},
+		{ "step": "activatePlugin", "pluginPath": "layout-primitives/layout-primitives.php" }
+	]
+}
