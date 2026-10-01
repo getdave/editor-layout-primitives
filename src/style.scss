@@ -1,1 +1,33 @@
 // Wireframe styles. Loaded in the editor and in pattern preview iframes.
+.lp-wireframe {
+	color: inherit;
+
+	svg {
+		display: block;
+		overflow: visible;
+	}
+
+	rect,
+	ellipse,
+	path {
+		fill: currentColor;
+		fill-opacity: 0.25;
+	}
+
+	.lp-wireframe__outline {
+		fill: none;
+		stroke: currentColor;
+		stroke-opacity: 0.5;
+		stroke-width: 2;
+	}
+}
+
+.lp-wireframe--heading,
+.lp-wireframe--paragraph {
+	width: 100%;
+}
+
+// Inside Canvas, wireframes fill their grid frame.
+.canvas__item.lp-wireframe {
+	height: 100%;
+}
