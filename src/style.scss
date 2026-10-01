@@ -9,9 +9,16 @@
 
 	rect,
 	ellipse,
-	path {
+	path,
+	circle {
 		fill: currentColor;
 		fill-opacity: 0.25;
+	}
+
+	// Image icon (image and cover). Targets the shapes themselves so it
+	// out-ranks the generic shape rule above, drawing over the box.
+	.lp-wireframe__icon * {
+		fill-opacity: 0.35;
 	}
 
 	.lp-wireframe__outline {
@@ -30,4 +37,45 @@
 // Inside Canvas, wireframes fill their grid frame.
 .canvas__item.lp-wireframe {
 	height: 100%;
+}
+
+.lp-wireframe--image {
+	aspect-ratio: 4 / 3;
+	width: 100%;
+
+	&.is-round {
+		aspect-ratio: 1;
+	}
+}
+
+// Inside Canvas, the grid frame sets the size.
+.canvas__item.lp-wireframe--image {
+	aspect-ratio: auto;
+}
+
+// Canvas image shapes: mask the wireframe with the shape Canvas puts in
+// --canvas-image-mask, as Canvas does for its own media placeholder.
+.canvas__image[data-canvas-shape].lp-wireframe--image > svg {
+	mask-image: var(--canvas-image-mask);
+	mask-repeat: no-repeat;
+	mask-size: 100% 100%;
+}
+
+.lp-wireframe--cover {
+	position: relative;
+	min-height: 360px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.lp-wireframe__cover-bg {
+		position: absolute;
+		inset: 0;
+	}
+
+	.lp-wireframe__cover-inner {
+		position: relative;
+		width: 100%;
+		padding: 2rem;
+	}
 }
