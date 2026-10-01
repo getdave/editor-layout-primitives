@@ -23,7 +23,12 @@ export function ImageIcon( { corner = false } ) {
 	);
 }
 
+// Image sizes arrive as CSS strings ("80px") or, from older markup, numbers.
+const cssSize = ( value ) =>
+	typeof value === 'number' ? `${ value }px` : value || undefined;
+
 export default function ImageWireframe( { attributes } ) {
+	const { width, height, aspectRatio, align } = attributes;
 	// Canvas shapes (circle, arch, diamond…) are applied by a CSS mask, the
 	// same way Canvas masks its own placeholder. See style.scss.
 	const round = ( attributes.className ?? '' )
@@ -34,6 +39,15 @@ export default function ImageWireframe( { attributes } ) {
 			round ? ' is-round' : ''
 		}`,
 		'aria-hidden': true,
+		// Mirror the image's own size so small images (a quote's 80px
+		// portrait) look small. Unset values fall back to the stylesheet.
+		style: {
+			width: cssSize( width ),
+			height: cssSize( height ),
+			aspectRatio:
+				aspectRatio && aspectRatio !== 'auto' ? aspectRatio : undefined,
+			marginInline: align === 'center' ? 'auto' : undefined,
+		},
 	} );
 	return (
 		<div { ...blockProps }>

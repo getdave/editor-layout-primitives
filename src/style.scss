@@ -46,6 +46,18 @@
 	&.is-round {
 		aspect-ratio: 1;
 	}
+
+	// The wrapper's aspect ratio sets the size; the drawing fills it. An
+	// in-flow svg with height:100% of an auto-height box falls back to 150px.
+	> svg {
+		position: absolute;
+		inset: 0;
+	}
+}
+
+// Low specificity so Canvas's own positioning of its items wins.
+:where(.lp-wireframe--image) {
+	position: relative;
 }
 
 // Inside Canvas, the grid frame sets the size.
