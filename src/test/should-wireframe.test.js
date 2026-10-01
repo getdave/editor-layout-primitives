@@ -8,12 +8,15 @@ describe( 'isEmptyBlock', () => {
 		expect( isEmptyBlock( 'core/paragraph', { content: '' } ) ).toBe(
 			true
 		);
-		expect( isEmptyBlock( 'core/button', { content: '  ' } ) ).toBe( true );
+		expect( isEmptyBlock( 'core/button', { text: '  ' } ) ).toBe( true );
 	} );
 	it( 'treats text blocks with content as filled', () => {
 		expect( isEmptyBlock( 'core/heading', { content: 'Hi' } ) ).toBe(
 			false
 		);
+	} );
+	it( 'reads the button label from text, not content', () => {
+		expect( isEmptyBlock( 'core/button', { text: 'Go' } ) ).toBe( false );
 	} );
 	it( 'handles RichTextData-like content objects', () => {
 		expect(
@@ -30,6 +33,11 @@ describe( 'isEmptyBlock', () => {
 	it( 'treats media blocks without a url as empty', () => {
 		expect( isEmptyBlock( 'core/image', {} ) ).toBe( true );
 		expect( isEmptyBlock( 'core/cover', { url: 'a.jpg' } ) ).toBe( false );
+	} );
+	it( 'treats covers using the featured image as filled', () => {
+		expect( isEmptyBlock( 'core/cover', { useFeaturedImage: true } ) ).toBe(
+			false
+		);
 	} );
 	it( 'returns false for unsupported blocks', () => {
 		expect( isEmptyBlock( 'core/list', {} ) ).toBe( false );
@@ -63,6 +71,16 @@ describe( 'shouldWireframe', () => {
 				ancestorClassNames: [ 'x', undefined ],
 			} )
 		).toBe( false );
+	} );
+	it( 'is true when the block itself has the marker class', () => {
+		expect(
+			shouldWireframe( {
+				name: 'core/cover',
+				attributes: { className: `is-style-x ${ MARKER }` },
+				isPreviewMode: true,
+				ancestorClassNames: [],
+			} )
+		).toBe( true );
 	} );
 	it( 'does not match marker substrings', () => {
 		expect(
